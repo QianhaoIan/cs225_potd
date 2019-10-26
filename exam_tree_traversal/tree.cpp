@@ -8,10 +8,7 @@ using namespace std;
 template <class T>
 Tree<T>::Iterator::Iterator(Tree::Node *root) : curr_(root) {
 	// TODO: your code here
-	// if (root) {
-	// 	help = helper(root);
-	// }
-	// queue<T> q;
+
 	s.push(root);
 	while(!s.empty()){
 		Node* cur = s.top();
@@ -20,23 +17,38 @@ Tree<T>::Iterator::Iterator(Tree::Node *root) : curr_(root) {
 		if(cur->right_) s.push(cur->right_);
 		if(cur->left_)  s.push(cur->left_);
 	}
+	q.pop();
 	// // cout << __LINE__ << endl;
 	// while (!q.empty()){
 	// 	cout << q.front()->data_ << endl;
 	// 	q.pop();
 	// }
+	cout << __LINE__ << endl;
+
 }
 
 
 template <class T>
 typename Tree<T>::Iterator & Tree<T>::Iterator::operator++() {
 	// TODO: your code here
+
+	// if (q.empty()) {
+	// 	curr_ = NULL;
+	// 	return *this;
+	// }
+
+	// q.pop();
+	// if (q.empty()) {
+	// 	curr_ = NULL;
+	// 	return *this;
+	// }
+	// else{
+	// 	curr_ = q.front();
+	// }
 	cout << __LINE__ << endl;
-	if (!q.empty()){
-		q.pop();
-		curr_ = q.front();
-	}
-	else curr_ = NULL;
+	curr_ = q.front();
+	q.pop();
+
 	return *this;
 }
 
@@ -45,8 +57,14 @@ template <class T>
 T Tree<T>::Iterator::operator*() const {
 	// TODO: your code here
 	cout << __LINE__ << endl;
-	return curr_->data_;
+	if (curr_) 
+		return curr_->data_;
+	return T();
 }
+
+
+
+
 
 
 
@@ -55,17 +73,20 @@ T Tree<T>::Iterator::operator*() const {
  *******************/
 template <class T>
 bool Tree<T>::Iterator::operator!=(const Tree<T>::Iterator &other) {
+	cout << __LINE__ << endl;
 	return !(curr_ == other.curr_);
 }
 
 template <class T>
 typename Tree<T>::Iterator Tree<T>::begin() {
+	cout << __LINE__ << endl;
 	// auto it = Iterator(root_);
 	return Iterator(root_);
 }
 
 template <class T>
 typename Tree<T>::Iterator Tree<T>::end() {
+	cout << __LINE__ << endl;
 	return Iterator(NULL);
 }
 
